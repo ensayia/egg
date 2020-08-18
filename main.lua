@@ -228,6 +228,7 @@ function node_select(key)
 		sys_status = 'saved on '..os.date()
 	elseif key == kb_escape then
 		if sys_countdown > 0 then
+			save_data()
 			love.event.quit()
 		else
 			sys_countdown = 1
