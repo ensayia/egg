@@ -1,6 +1,4 @@
-# egg
-
-## an ultra-mininal note taking system, free of distractions and fluff
+# egg - minimal node style note taking system
 
 egg requires the LOVE framework, available on most operating systems
 
