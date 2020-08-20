@@ -1,5 +1,5 @@
 local utf8 = require ('utf8')
-require 'tserial'
+require 'lib.tserial'
 random = love.math.random
 
 sys_font_size		= 32
@@ -14,7 +14,7 @@ sys_timer 			= 0
 text_cursor			= 0
 text_current_line	= 1
 sys_status			= 'double tap [esc] to quit'
-img_egg				= love.graphics.newImage('egg.png')
+img_egg				= love.graphics.newImage('img/egg.png')
 sys_countdown		= 0
 
 color_accent 		= {.43, .40, .41, 1}
@@ -86,7 +86,7 @@ generate_node_vis()
 function _line_length() return #node_vis[cursor].text[text_current_line] end
 
 function love.load()
-	fontText = love.graphics.newFont('dejavusansmono.ttf', sys_font_size)
+	fontText = love.graphics.newFont('font/dejavusansmono.ttf', sys_font_size)
 	love.graphics.setFont(fontText)
 	love.graphics.setBackgroundColor(color_background)
 	love.keyboard.setKeyRepeat(true)
