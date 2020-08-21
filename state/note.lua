@@ -143,6 +143,16 @@ function note.node_select(key)
 			n.collapsed = not n.collapsed
 			note.generate_node_vis()
 		end
+	elseif love.keyboard.isDown(option.kb_mod) and key == option.kb_up then
+		if note.node_vis[note.cursor].depth == note.node_vis[note.cursor - 1].depth then
+			note.node[note.node_vis[note.cursor - 1].index], note.node[note.node_vis[note.cursor].index] = note.node[note.node_vis[note.cursor].index], note.node[note.node_vis[note.cursor - 1].index]
+		end
+		note.generate_node_vis()
+	elseif love.keyboard.isDown(option.kb_mod) and key == option.kb_down then
+		if note.node_vis[note.cursor].depth == note.node_vis[note.cursor + 1].depth then
+			note.node[note.node_vis[note.cursor + 1].index], note.node[note.node_vis[note.cursor].index] = note.node[note.node_vis[note.cursor].index], note.node[note.node_vis[note.cursor + 1].index]
+		end
+		note.generate_node_vis()
 	elseif key == option.kb_down then
 		note.cursor = math.min(note.cursor + 1, #note.node_vis)
 		note.current_node = note.node_vis[note.cursor].index

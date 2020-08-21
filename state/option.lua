@@ -23,7 +23,7 @@ option.kb_help			= 'f1'
 option.kb_option		= 'f2'
 
 function option.draw()
-	lg.print('nothing here yet', 32, 78)
+	lg.print('no options available', 32, 56)
 end
 
 function option.keypressed(key)
