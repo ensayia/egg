@@ -5,7 +5,7 @@ note.current_node		= 1
 note.cursor				= 1
 note.depth				= 1
 note.depth_max			= 18
-note.node_spacing		= 20
+note.node_spacing		= 32
 note.node_offset		= 32
 note.text_cursor		= 0
 note.text_current_line	= 1
@@ -78,7 +78,11 @@ function note.draw()
 			lg.circle('fill', (note.node_spacing * v.depth) + note.node_spacing, ((note.node_offset * k) - note.node_offset) + note.node_offset + 46, 4, 16)
 			lg.setColor(option.color_white)
 		end
-		lg.print(v.name, (note.node_spacing * v.depth) + note.node_spacing + 16, ((note.node_offset * k) - note.node_offset) + note.node_offset + 26)
+		if note.mode == 'node_edit' and note.node_vis[note.cursor] == v then
+			lg.print(v.name.._a, (note.node_spacing * (v.depth + 1)), ((note.node_offset * k) - note.node_offset) + note.node_offset + 26)
+		else
+			lg.print(v.name, (note.node_spacing * (v.depth + 1)), ((note.node_offset * k) - note.node_offset) + note.node_offset + 26)
+		end
 	end
 	lg.setColor(option.color_accent)
 	lg.circle('line', 20, (note.cursor * note.node_offset) + 46, 8, 16)
@@ -91,9 +95,6 @@ function note.draw()
 	local cursor_draw = note.text_cursor * (note.node_spacing - 1)
 	if note.mode == 'text_edit' then
 		lg.print(_a, 630 + cursor_draw, 58 + ((note.text_current_line-1) * 32))
-	end
-	if note.mode == 'node_edit' then
-		lg.print(_a, (#note.node_vis[note.cursor].name * 19) + (note.node_vis[note.cursor].depth * 19) + 38, ((note.cursor * note.node_offset) - note.node_offset) + 60)
 	end
 	lg.setColor(option.color_line)
 	lg.rectangle('fill', 615, 8, 4,lg.getHeight() - 20)
