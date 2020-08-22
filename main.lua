@@ -10,12 +10,13 @@ lg = love.graphics	-- used everywhere, so we'll make it global
 
 sys = {}
 
-sys.status			= '[f1]: help, [f2]: options, [esc]: back, [esc][esc]: quit'
-sys.font_size		= 32
-sys.timer 			= 0
-sys.egg				= lg.newImage('img/egg.png')
-sys.countdown		= 0
-sys.font 			= lg.newFont('font/dejavusansmono.ttf', sys.font_size)
+sys.status				= '[f1]: help, [f2]: options, [esc]: back, [esc][esc]: quit'
+sys.font_size			= 16
+sys.text_block_offset	= sys.font_size * 24
+sys.egg_size 			= (sys.font_size / 32) - (sys.font_size / 64)
+sys.timer 				= 0
+sys.countdown			= 0
+sys.font 				= lg.newFont('font/dejavusansmono.ttf', sys.font_size)
 
 -- using a global variable to change a global namespace, this is quite dangerous!
 sys.state			= note -- or option, or help
@@ -40,11 +41,9 @@ function love.draw()
 	sys.state.draw()
 	
 	lg.setColor(option.color_line)
-	lg.rectangle('fill', 0, 0, lg.getWidth(), 46)
-	lg.rectangle('fill', 0, lg.getHeight() - 44, lg.getWidth(), 50)
+	lg.rectangle('fill', 0, lg.getHeight() - sys.font_size - 6, lg.getWidth(), sys.font_size + 6)
 	lg.setColor(option.color_accent)
-	lg.print('egg: '..sys.status, 20, lg.getHeight() - 42)
-	lg.draw(sys.egg, 4, 4, 0, .3, .3)
+	lg.print('egg: '..sys.status, sys.font_size, lg.getHeight() - sys.font_size - 6)
 	lg.setColor(option.color_white)
 end
 

@@ -5,8 +5,6 @@ note.current_node		= 1
 note.cursor				= 1
 note.depth				= 1
 note.depth_max			= 18
-note.node_spacing		= 32
-note.node_offset		= 32
 note.text_cursor		= 0
 note.text_current_line	= 1
 
@@ -73,31 +71,34 @@ function note.draw()
 		_a = '░'
 	end
 	for k, v in ipairs(note.node_vis) do
-		if v.collapsed then
-			lg.setColor(option.color_accent)
-			lg.circle('fill', (note.node_spacing * v.depth) + note.node_spacing, ((note.node_offset * k) - note.node_offset) + note.node_offset + 46, 4, 16)
-			lg.setColor(option.color_white)
-		end
 		if note.mode == 'node_edit' and note.node_vis[note.cursor] == v then
-			lg.print(v.name.._a, (note.node_spacing * (v.depth + 1)), ((note.node_offset * k) - note.node_offset) + note.node_offset + 26)
+			if v.collapsed then
+				lg.print(v.name..' +'.._a, sys.font_size * (v.depth + 1), ((sys.font_size * k) - sys.font_size) + sys.font_size)
+			else
+				lg.print(v.name.._a, sys.font_size * (v.depth + 1), ((sys.font_size * k) - sys.font_size) + sys.font_size)
+			end
 		else
-			lg.print(v.name, (note.node_spacing * (v.depth + 1)), ((note.node_offset * k) - note.node_offset) + note.node_offset + 26)
+			if v.collapsed then
+				lg.print(v.name..' +', sys.font_size * (v.depth + 1), ((sys.font_size * k) - sys.font_size) + sys.font_size)
+			else
+				lg.print(v.name, sys.font_size * (v.depth + 1), ((sys.font_size * k) - sys.font_size) + sys.font_size)
+			end
+		end
+		if note.node_vis[note.cursor] == v then
+			lg.print('[', 4, ((sys.font_size * k) - sys.font_size) + sys.font_size)
 		end
 	end
-	lg.setColor(option.color_accent)
-	lg.circle('line', 20, (note.cursor * note.node_offset) + 46, 8, 16)
-	lg.setColor(option.color_white)
 	local txt = note.build_text()
 	local _len = #note.node_vis[note.cursor].text
 	for k, v in ipairs(txt) do
-		lg.print(v, 630, 58 + ((k-1)*32))
+		lg.print(v, sys.text_block_offset + sys.font_size, k * sys.font_size)
 	end
-	local cursor_draw = note.text_cursor * (note.node_spacing - 1)
 	if note.mode == 'text_edit' then
-		lg.print(_a, 630 + cursor_draw, 58 + ((note.text_current_line-1) * 32))
+		local _len = note.cursor_position()
+		lg.print(_len.._a, sys.text_block_offset, (note.text_current_line * sys.font_size) + sys.font_size)
 	end
 	lg.setColor(option.color_line)
-	lg.rectangle('fill', 615, 8, 4,lg.getHeight() - 20)
+	lg.rectangle('fill', sys.text_block_offset - sys.font_size, 0, sys.font_size, lg.getHeight() - 20)
 	lg.setColor(option.color_white)	
 end
 
@@ -276,4 +277,16 @@ function note.textinput(t)
 		table.insert(note.node_vis[note.cursor].text[note.text_current_line], note.text_cursor + 1, t)
 		note.text_cursor = note.text_cursor + 1
 	end	
+end
+
+function note.cursor_position()
+	local _len = ''
+	if note.text_cusor == 0 then
+		return ''
+	else
+		for i = 0, note.text_cursor -1 do
+			_len = _len .. ' '
+		end
+	end
+	return _len
 end
