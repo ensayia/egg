@@ -95,7 +95,7 @@ function note.draw()
 	end
 	if note.mode == 'text_edit' then
 		local _len = note.cursor_position()
-		lg.print(_len.._a, sys.text_block_offset, (note.text_current_line * sys.font_size) + sys.font_size)
+		lg.print(_len.._a, sys.text_block_offset + sys.font_size, note.text_current_line * sys.font_size)
 	end
 	lg.setColor(option.color_line)
 	lg.rectangle('fill', sys.text_block_offset - sys.font_size, 0, sys.font_size, lg.getHeight() - 20)
