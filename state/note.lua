@@ -85,7 +85,7 @@ function note.draw()
 			end
 		end
 		if note.node_vis[note.cursor] == v then
-			lg.print('[', 4, ((sys.font_size * k) - sys.font_size) + sys.font_size)
+			lg.print('>', 4, ((sys.font_size * k) - sys.font_size) + sys.font_size)
 		end
 	end
 	local txt = note.build_text()
