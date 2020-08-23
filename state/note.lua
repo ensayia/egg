@@ -13,6 +13,7 @@ note.node_vis = {}
 
 function note.save_data()
 	local _s = TSerial.pack(note.node)
+	love.filesystem.write('backup-' .. os.time() .. '.lua', _s)
 	love.filesystem.write('data.lua', _s)
 end
 
