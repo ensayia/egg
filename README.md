@@ -20,6 +20,9 @@ egg does not have mouse support
 - ctrl + s : save
 - space : collapse node children
 
+- f1: help menu
+- f2: options menu
+
 ## features
 - egg notes are stored in a lua table hierarchy, serialized and saved into a lua file
 - egg saves on exit
