@@ -221,7 +221,7 @@ function note.text_edit(key)
     elseif key == option.kb_escape then
 		note.mode = 'node_select'
 	elseif key == option.kb_return then
-		table.insert(note.node_vis[note.cursor].text, note.text_current_line + 1, {})
+		table.insert(note.node_vis[note.cursor].text, note.text_current_line, {})
 		note.text_current_line = note.text_current_line + 1
 		note.text_cursor = 0
 	elseif key == option.kb_down then
