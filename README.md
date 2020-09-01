@@ -25,5 +25,5 @@ egg does not have mouse support
 
 ## features
 - egg notes are stored in a lua table hierarchy, serialized and saved into a lua file
-- egg saves on exit
+- egg saves on exit, and also creates an incremental backup with each save
 - egg has full utf-8 support and utilizes the Deja Vu Sans Mono font
